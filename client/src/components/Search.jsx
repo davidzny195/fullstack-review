@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Search = ({ onSearch }) => {
 
-  const[term, setTerm] = useState('')
+  const[term, setTerm] = useState('davidzny195')
 
   const onChange = (e) => {
     setTerm(e.target.value);

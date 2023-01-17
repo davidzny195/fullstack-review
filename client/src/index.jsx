@@ -8,14 +8,16 @@ const App = () => {
 
   const [repos, setRepos] = useState([]);
 
-  const search = async (term) => {
-    const res = await fetch('http://127.0.0.1:3000/repos', {
+  const search = (term) => {
+    let data = { username: term }
+    fetch('http://localhost:1128/repos', {
       method: "POST",
       headers: {
-        'Content-Type': 'text/plain' //'application/json'
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(term)
-    })
+      body: JSON.stringify(data)
+    }).then((res) => res.json())
+      .then((data) => console.log(data))
   }
 
   return (
