@@ -1,6 +1,6 @@
 const express = require('express');
 let app = express();
-
+const models = require('./models')
 // Middleware
 const morgan = require('morgan');
 
@@ -9,6 +9,8 @@ const morgan = require('morgan');
 // Webpack is configured to generate files in that directory and
 // this server must serve those files when requested.
 app.use(express.static('client/dist'));
+app.use(morgan('dev'));
+app.use(express.json())
 
 app.post('/repos', function (req, res) {
   // TODO - your code here!

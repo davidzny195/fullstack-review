@@ -1,3 +1,3 @@
 module.exports = {
-  TOKEN: 'YOUR TOKEN HERE'
+  TOKEN: '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'
 };
