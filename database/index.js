@@ -24,7 +24,7 @@ let repoSchema = new mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-const save = async (repos) => {
+const save = (repos) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
@@ -46,12 +46,7 @@ const save = async (repos) => {
     reposDb.push(newRepo)
   }
 
-  try {
-    const res = await Repo.insertMany(reposDb)
-    return res
-  } catch (error) {
-    console.log('error save')
-  }
+  return Repo.insertMany(reposDb)
 }
 
 const read = async() => {

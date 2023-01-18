@@ -19,10 +19,9 @@ module.exports = {
         if (!repos) {
           throw new Error ('No Repos')
         }
-        const updateDb = await models.repos.post(repos)
-        if (updateDb) {
-          res.status(201).json(`${updateDb.length} new repos imported, ${updateDb.length} repos updated`)
-        }
+        return models.repos.post(repos).then((result) => {
+          res.status(201).json(`${result.length} new repos imported, ${result.length} repos updated`)
+        })
       } catch (error) {
         res.sendStatus(404)
       }
