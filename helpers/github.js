@@ -10,7 +10,6 @@ let getReposByUsername = async (username) => {
   let requestUrl = `https://api.github.com/users/${username}/repos`
   let options = {
     url: requestUrl,
-    method: 'GET',
     headers: {
       'User-Agent': 'request',
       'Authorization': `token ${config.TOKEN}`

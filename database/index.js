@@ -16,6 +16,7 @@ let repoSchema = new mongoose.Schema({
   repo_name: String,
   owner_id: Number,
   owner_name: String,
+  owner_url: String,
   forks: Number,
   url: String,
   description: String
@@ -37,6 +38,7 @@ const save = async (repos) => {
       repo_name: repo.name,
       owner_id: repo.owner.id,
       owner_name: repo.owner.login,
+      owner_url: repo.owner.html_url,
       forks: repo.forks_count,
       url: repo.html_url,
       description: repo.description
