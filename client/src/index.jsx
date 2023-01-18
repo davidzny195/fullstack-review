@@ -10,14 +10,14 @@ const App = () => {
 
   const search = (term) => {
     let data = { username: term }
-     return fetch('http://localhost:1128/repos', {
+     return fetch('http://localhost:1128/api/repos', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     }).then((res) => {
-      if (res.status !== 200) {
+      if (res.status !== 201) {
         throw new Error ('Error fetching')
       }
       getRepos()
@@ -27,7 +27,7 @@ const App = () => {
   }
 
   const getRepos = () => {
-    return fetch('http://localhost:1128/repos', {
+    return fetch('http://localhost:1128/api/repos', {
       method: "GET",
       headers: {
         'Content-Type': 'application/json'

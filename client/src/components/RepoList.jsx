@@ -2,7 +2,6 @@ import React from 'react';
 
 const RepoList = ({ repos }) => {
 
-  console.log(repos)
   return (
   <div>
     <h4> Repo List Component </h4>

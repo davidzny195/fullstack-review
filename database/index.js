@@ -30,7 +30,6 @@ const save = async (repos) => {
 
   // db.Repos.createIndex({"id":1}, {unique: true})
   // repo command to createIndex
-
   const reposDb = []
   for (let repo of repos) {
     let newRepo = new Repo({
@@ -44,6 +43,7 @@ const save = async (repos) => {
     })
     reposDb.push(newRepo)
   }
+
   try {
     const res = await Repo.insertMany(reposDb)
     return res
