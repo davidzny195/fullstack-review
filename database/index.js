@@ -54,7 +54,7 @@ const save = async (repos) => {
 
 const read = async() => {
   try {
-    const res = Repo.find().limit(25).sort({ forks: 1 })
+    const res = Repo.find({}).limit(25).sort({ forks: 1 })
     return res
   } catch (err) {
     console.log('error read')

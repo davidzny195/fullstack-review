@@ -12,6 +12,7 @@ const RepoList = ({ repos }) => {
           <div key={idx}>
             <p>Owner: {repo.owner_name}</p>
             <p>Repo Name: {repo.repo_name}</p>
+            <p>Forks: {repo.forks}</p>
             <a href={repo.url}>Link to github</a>
             <hr></hr>
           </div>
@@ -23,15 +24,5 @@ const RepoList = ({ repos }) => {
 
 
 }
-
-// {repos.map((repo) =>
-//   Object.keys(repo).map((key, idx) => {
-//   return (
-// <div key={idx}>
-//   {key !== 'url' ? <div> {key} : {repo[key]}</div> : <a href={repo[key]}>{repo[key]}</a>}
-//   </div>
-//  )
-// })
-// )}
 
 export default RepoList;

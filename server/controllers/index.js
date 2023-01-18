@@ -6,7 +6,7 @@ module.exports = {
     get: async (req, res) => {
       try {
         const repos = await models.repos.get()
-        res.json(repos)
+        res.status(200).json(repos)
       } catch (error) {
         res.sendStatus(404)
       }
@@ -20,9 +20,8 @@ module.exports = {
           throw new Error ('No Repos')
         }
         const updateDb = await models.repos.post(repos)
-
         if (updateDb) {
-          res.sendStatus(201)
+          res.status(201).json(`${updateDb.length} new repos imported, ${updateDb.length} repos updated`)
         }
       } catch (error) {
         res.sendStatus(404)
