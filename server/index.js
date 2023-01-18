@@ -34,9 +34,15 @@ app.post('/repos', async (req, res) => {
 
 });
 
-app.get('/repos', function (req, res) {
+app.get('/repos', async (req, res) => {
   // TODO - your code here!
   // This route should send back the top 25 repos
+  try {
+    const repos = await db.read()
+    res.json(repos)
+  } catch (error) {
+    console.log('error reading')
+  }
 });
 
 app.get('/', function(req, res) {

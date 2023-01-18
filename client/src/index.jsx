@@ -10,21 +10,44 @@ const App = () => {
 
   const search = (term) => {
     let data = { username: term }
-    fetch('http://localhost:1128/repos', {
+     return fetch('http://localhost:1128/repos', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
-    }).then((res) => res.json())
-      .then((data) => console.log(data))
+    }).then((res) => {
+      if (res.status !== 200) {
+        throw new Error ('Error fetching')
+      }
+      getRepos()
+    }).catch((err) => {
+      console.log('Error fetching')
+    })
   }
+
+  const getRepos = () => {
+    return fetch('http://localhost:1128/repos', {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((data) => {
+      return data.json()
+    }).then((res) => {
+      setRepos(res)
+    })
+  }
+
+  React.useEffect(() => {
+    getRepos()
+  }, [])
 
   return (
     <div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={repos}/>
       <Search onSearch={search}/>
+      <RepoList repos={repos}/>
     </div>
   );
 }
