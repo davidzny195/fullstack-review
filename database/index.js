@@ -12,17 +12,25 @@ db.on('open', () => {
 
 let repoSchema = new mongoose.Schema({
   // TODO: your schema here!
-  id: Number,
+  _id: { type: Number, unique: true },
   repo_name: String,
   owner_id: Number,
   owner_name: String,
   owner_url: String,
   forks: Number,
-  url: String,
+  url: { type: String, unique: true },
   description: String
 }, {collection: 'Repos'});
 
+let ownerSchema = new mongoose.Schema({
+  owner_id: Number,
+  owner_name: String,
+  owner_url: String,
+  repos: [{type: Number, ref: 'Repo'}]
+}, {collection: 'Owners'})
+
 let Repo = mongoose.model('Repo', repoSchema);
+let Owner = mongoose.model('Owner', ownerSchema);
 
 const save = (repos) => {
   // TODO: Your code here
@@ -33,8 +41,8 @@ const save = (repos) => {
   // repo command to createIndex
   const reposDb = []
   for (let repo of repos) {
-    let newRepo = new Repo({
-      id: repo.id,
+    let newRepo = {
+      _id: repo.id,
       repo_name: repo.name,
       owner_id: repo.owner.id,
       owner_name: repo.owner.login,
@@ -42,20 +50,18 @@ const save = (repos) => {
       forks: repo.forks_count,
       url: repo.html_url,
       description: repo.description
-    })
+    }
     reposDb.push(newRepo)
   }
 
-  return Repo.insertMany(reposDb)
+  return Repo.insertMany(reposDb).catch((err) => {
+    throw new Error(err)
+  })
 }
 
-const read = async() => {
-  try {
-    const res = Repo.find({}).limit(25).sort({ forks: 1 })
-    return res
-  } catch (err) {
-    console.log('error read')
-  }
+const read = () => {
+  return Repo.find({}).limit(25).sort({ forks: 1 })
+
 }
 
 module.exports = { save, read };

@@ -7,7 +7,9 @@ module.exports = {
     },
 
     post: (repos) => {
-      return db.save(repos)
+      return db.save(repos).catch((err) => {
+        throw new Error (err)
+      })
 
     }
   }

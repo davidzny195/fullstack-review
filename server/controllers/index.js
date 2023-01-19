@@ -21,6 +21,8 @@ module.exports = {
         }
         return models.repos.post(repos).then((result) => {
           res.status(201).json(`${result.length} new repos imported, ${result.length} repos updated`)
+        }).catch((err) => {
+          res.sendStatus(404)
         })
       } catch (error) {
         res.sendStatus(404)
